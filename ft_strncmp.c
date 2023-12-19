@@ -6,7 +6,7 @@
 /*   By: haouky <haouky@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 10:22:14 by haouky            #+#    #+#             */
-/*   Updated: 2023/12/13 19:03:15 by haouky           ###   ########.fr       */
+/*   Updated: 2023/12/15 10:59:26 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	{
 		if (p1[i] != p2[i])
 			return (p1[i] - p2[i]);
+		if (p1[i] == 0)
+			return (0);
 		i++;
 	}
 	return (0);

@@ -1,42 +1,61 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haouky <haouky@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/15 15:27:43 by haouky            #+#    #+#             */
-/*   Updated: 2023/12/17 10:49:39 by haouky           ###   ########.fr       */
+/*   Created: 2023/12/18 10:02:47 by haouky            #+#    #+#             */
+/*   Updated: 2023/12/19 15:01:59 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int st, size_t l)
+static char	*rev(char *c)
 {
-	char	*c;
-	size_t	i;
+	int		i;
+	int		l;
+	char	*v;
 
 	i = 0;
-	if (ft_strlen(s) < st)
-	{
-		c = malloc(1);
-		if (c == 0)
-			return (0);
-		c[0] = '\0';
-		return (c);
-	}
-	while (s[st + i] != 0 && i < l)
-		i++;
-	c = malloc (i + 1);
-	if (c == 0)
+	l = ft_strlen(c) - 1;
+	v = malloc (l + 2);
+	if (v == 0)
 		return (0);
-	i = 0;
-	while (s[st + i] != 0 && i < l)
+	while (i <= l)
 	{
-		c[i] = s[st + i];
+		v[i] = c[l - i];
 		i++;
 	}
+	v[i] = '\0';
+	return (v);
+}
+
+char	*ft_itoa(int nb)
+{
+	long	n;
+	char	c[12];
+	int		i;
+	char	*p;
+
+	n = nb;
+	i = 0;
+	if (n < 0)
+		n = -n;
+	if (n == 0)
+		c[i++] = '0';
+	while (n > 0)
+	{
+		c[i] = n % 10 + 48;
+		n = n / 10;
+		i++;
+	}
+	if (nb < 0)
+		c[i++] = '-';
 	c[i] = '\0';
-	return (c);
+	p = rev(c);
+	if (p == 0)
+		return (0);
+	return (p);
 }
