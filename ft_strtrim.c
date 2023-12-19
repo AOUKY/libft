@@ -1,42 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haouky <haouky@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/15 15:27:43 by haouky            #+#    #+#             */
-/*   Updated: 2023/12/17 10:49:39 by haouky           ###   ########.fr       */
+/*   Created: 2023/12/16 11:03:58 by haouky            #+#    #+#             */
+/*   Updated: 2023/12/16 16:14:44 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int st, size_t l)
+static int	chek(char c, const char *set)
 {
-	char	*c;
-	size_t	i;
+	int	j;
 
-	i = 0;
-	if (ft_strlen(s) < st)
+	j = 0;
+	while (set[j] != 0)
 	{
-		c = malloc(1);
-		if (c == 0)
-			return (0);
-		c[0] = '\0';
-		return (c);
+		if (set[j] == c)
+			return (1);
+		j++;
 	}
-	while (s[st + i] != 0 && i < l)
-		i++;
-	c = malloc (i + 1);
-	if (c == 0)
-		return (0);
-	i = 0;
-	while (s[st + i] != 0 && i < l)
-	{
-		c[i] = s[st + i];
-		i++;
-	}
-	c[i] = '\0';
-	return (c);
+	return (0);
+}
+
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	int		s;
+	int		e;
+	char	*p;
+
+	s = 0;
+	e = ft_strlen(s1) - 1;
+	while (s1[s] != 0 && chek(s1[s], set))
+		s++;
+	while (e >= s && chek(s1[e], set))
+		e--;
+	p = ft_substr(s1, s, (e - s + 1));
+	return (p);
 }
