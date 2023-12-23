@@ -9,6 +9,9 @@
 /*   Updated: 2023/12/15 10:52:25 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
+
 char	*ft_strchr(const char *str, int c)
 {
 	while (*str)
