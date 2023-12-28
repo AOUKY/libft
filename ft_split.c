@@ -35,7 +35,7 @@ static int	cw(char const *s, char c)
 	return (ct);
 }
 
-static int	lw(char const *s, char c)
+static int	lenw(char const *s, char c)
 {
 	int	i;
 
@@ -49,33 +49,41 @@ void	fr(char **s, int i)
 {
 	while (i >= 0)
 		free(s[i--]);
-	free (s);
+	free(s);
 }
 
-char	**ft_split(char const *s, char c)
+static char	**msp(char **str, char const *s, int word, char c)
 {
-	char	**str;
-	int		i;
-	int		w;
+	int	i;
 
 	i = 0;
-	w = cw(s, c); 
-	str = malloc((w + 1) * sizeof(char *));
-	if (str == 0)
-		return (0);
-	while (i < w)
+	while (i < word)
 	{
 		while (*s == c)
 			s++;
-		str[i] = ft_substr(s, 0, lw(s, c));
+		str[i] = ft_substr(s, 0, lenw(s, c));
 		if (str[i] == 0)
 		{
 			fr(str, i);
 			return (0);
 		}
-		s += lw(s, c);
+		s += lenw(s, c);
 		i++;
 	}
 	str[i] = NULL;
 	return (str);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**str;
+	int		word;
+
+	if (!s)
+		return (0);
+	word = cw(s, c);
+	str = malloc((word + 1) * sizeof(char *));
+	if (str == 0)
+		return (0);
+	return (msp(str, s, word, c));
 }
