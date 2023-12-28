@@ -6,7 +6,7 @@
 /*   By: haouky <haouky@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 10:32:05 by haouky            #+#    #+#             */
-/*   Updated: 2023/12/19 17:22:15 by haouky           ###   ########.fr       */
+/*   Updated: 2023/12/19 16:54:09 by haouky           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,22 @@ static size_t	find(const char *find, const char *str, size_t l)
 char	*ft_strnstr(const char *str, const char *to_find, size_t len)
 {
 	size_t	i;
-	size_t	j;
-	size_t	lf;
+	size_t	chek_sz;
+	size_t	len_find;
 
 	i = 0;
-	lf = ft_strlen(to_find);
+	len_find = ft_strlen(to_find);
 	if (to_find[i] == '\0')
 		return ((char *)str);
 	if (len == 0)
 		return (0);
 	while (i < len && str[i] != '\0')
 	{
-		j = 0;
-		if (str[i] == to_find[j])
+		chek_sz = 0;
+		if (str[i] == to_find[chek_sz])
 		{
-			j = find (&to_find[j], &str[i], len - i);
-			if (j == lf)
+			chek_sz = find (to_find, &str[i], len - i);
+			if (chek_sz == len_find)
 				return ((char *)&str[i]);
 		}
 		i++;

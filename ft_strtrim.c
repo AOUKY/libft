@@ -28,16 +28,20 @@ static int	chek(char c, const char *set)
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	int		s;
-	int		e;
+	int		i;
+	int		l;
 	char	*p;
 
-	s = 0;
-	e = ft_strlen(s1) - 1;
-	while (s1[s] != 0 && chek(s1[s], set))
-		s++;
-	while (e >= s && chek(s1[e], set))
-		e--;
-	p = ft_substr(s1, s, (e - s + 1));
+	if (!set)
+		return ((char *)s1);
+	if (!s1)
+		return (0);
+	i = 0;
+	l = ft_strlen(s1) - 1;
+	while (s1[i] != 0 && chek(s1[i], set))
+		i++;
+	while (l >= i && chek(s1[l], set))
+		l--;
+	p = ft_substr(s1, i, (l - i + 1));
 	return (p);
 }
